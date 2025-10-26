@@ -1,36 +1,45 @@
-// Nom du cache
-const CACHE_NAME = 'abenabbes-v2';
+// Nom du cache (incrémente à chaque mise à jour du site)
+const CACHE_NAME = 'abenabbes-v3';
 
-// Fichiers à mettre en cache (à adapter selon ton site)
+// Liste des fichiers à mettre en cache
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './css/style-site.css',
+  './css/style-site.css', 
   './site.webmanifest',
   './favicon/web-app-manifest-192x192.png',
   './favicon/web-app-manifest-512x512.png'
 ];
 
-// Installation du service worker et mise en cache des fichiers
+// Installation du Service Worker
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log('Mise en cache des fichiers...');
-      return cache.addAll(ASSETS_TO_CACHE);
+    caches.open(CACHE_NAME).then(async cache => {
+      console.log('📦 Mise en cache des fichiers...');
+      for (const asset of ASSETS_TO_CACHE) {
+        try {
+          await cache.add(asset);
+          console.log(`✅ Ajouté au cache : ${asset}`);
+        } catch (err) {
+          console.warn(`⚠️ Échec du cache pour : ${asset}`, err);
+        }
+      }
     })
   );
 });
 
-// Activation du service worker et nettoyage de l’ancien cache
+// Activation : suppression des anciens caches
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
-        keys.filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
-      );
-    })
+    caches.keys().then(keys =>
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
+    )
   );
+  console.log('🔄 Service Worker activé');
 });
 
 // Interception des requêtes réseau
