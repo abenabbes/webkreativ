@@ -1,17 +1,18 @@
-// Nom du cache (incrémente à chaque mise à jour du site)
-const CACHE_NAME = 'abenabbes-v3';
+// Nom du cache (incrémentez à chaque mise à jour du site)
+const CACHE_NAME = 'abenabbes-v4';
 
 // Liste des fichiers à mettre en cache
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './css/style-site.css', // Correct selon ta confirmation
+  './css/style-site.css',
   './site.webmanifest',
   './favicon/web-app-manifest-192x192.png',
   './favicon/web-app-manifest-512x512.png'
+  // Plus tard : './offline.html' si tu ajoutes la page hors-ligne
 ];
 
-// Installation du Service Worker
+// Installation du service worker
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {
@@ -26,6 +27,8 @@ self.addEventListener('install', event => {
       }
     })
   );
+  // Active le service worker immédiatement après l'installation
+  self.skipWaiting();
 });
 
 // Activation : suppression des anciens caches
@@ -40,13 +43,18 @@ self.addEventListener('activate', event => {
     )
   );
   console.log('🔄 Service Worker activé');
+  self.clients.claim(); // Prend le contrôle immédiat des pages
 });
 
 // Interception des requêtes réseau
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+      // Retourne la ressource du cache si disponible
+      return response || fetch(event.request).catch(() => {
+        // Si hors-ligne et fichier non trouvé, tu pourras servir offline.html ici
+        // return caches.match('./offline.html');
+      });
     })
   );
 });
