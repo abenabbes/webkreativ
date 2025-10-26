@@ -4,7 +4,7 @@
     "description": "Création de sites web modernes, responsives et optimisés SEO. Développeur web freelance à votre service.",
     "lang": "fr-FR",
     "start_url": "./index.html",
-    "scope": "/",   
+    "scope": "./",   
     "orientation": "any",
     "icons": [
     {
