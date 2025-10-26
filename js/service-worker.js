@@ -5,7 +5,7 @@ const CACHE_NAME = 'abenabbes-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './css/style-site.css', 
+  './css/style-site.css', // Correct selon ta confirmation
   './site.webmanifest',
   './favicon/web-app-manifest-192x192.png',
   './favicon/web-app-manifest-512x512.png'
@@ -21,7 +21,7 @@ self.addEventListener('install', event => {
           await cache.add(asset);
           console.log(`✅ Ajouté au cache : ${asset}`);
         } catch (err) {
-          console.warn(`⚠️ Échec du cache pour : ${asset}`, err);
+          console.warn(`⚠️ Impossible de mettre en cache : ${asset}`, err);
         }
       }
     })
@@ -46,7 +46,6 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      // Retourne la ressource du cache ou la télécharge
       return response || fetch(event.request);
     })
   );
