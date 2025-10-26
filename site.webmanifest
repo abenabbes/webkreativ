@@ -3,18 +3,18 @@
     "short_name": "AbenabbesDev",
     "description": "Création de sites web modernes, responsives et optimisés SEO. Développeur web freelance à votre service.",
     "lang": "fr-FR",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "scope": "/",   
     "orientation": "any",
     "icons": [
     {
-      "src": "/favicon/web-app-manifest-192x192.png",
+      "src": "./favicon/web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/favicon/web-app-manifest-512x512.png",
+      "src": "./favicon/web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

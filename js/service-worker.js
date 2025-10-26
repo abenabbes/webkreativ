@@ -1,14 +1,14 @@
 // Nom du cache
-const CACHE_NAME = 'abenabbes-v1';
+const CACHE_NAME = 'abenabbes-v2';
 
 // Fichiers à mettre en cache (à adapter selon ton site)
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/css/style-site.css',
-  '/site.webmanifest',
-  '/favicon/web-app-manifest-192x192.png',
-  '/favicon/web-app-manifest-512x512.png'
+  './',
+  './index.html',
+  './css/style-site.css',
+  './site.webmanifest',
+  './favicon/web-app-manifest-192x192.png',
+  './favicon/web-app-manifest-512x512.png'
 ];
 
 // Installation du service worker et mise en cache des fichiers
