@@ -359,37 +359,54 @@
                     </div>
                     
                     <div class="scroll-animate">
-                        <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg">
+                        <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg" 
+                              action="https://api.web3forms.com/submit" method="POST">
+                              <!-- key d'accès Web3Forms -->
+                            <input type="hidden" name="access_key" value="bda86073-5e00-4376-9b7a-4d137183ef5b">
+
                             <div class="mb-6">
                                 <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
-                                <input 
+                                <input name="name"
                                     type="text" 
                                     id="name" 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
                                     placeholder="Votre nom"
                                 >
                             </div>
                             
                             <div class="mb-6">
                                 <label class="block text-gray-700 mb-2" for="email">Email</label>
-                                <input 
+                                <input name="email"
                                     type="email" 
                                     id="email" 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
                                     placeholder="votre@email.com"
+                                >
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="email">Téléphone</label>
+                                <input name="telephone"
+                                    type="tel" 
+                                    id="telephone" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
+                                    placeholder="06 02 03 04 05"
                                 >
                             </div>
                             
                             <div class="mb-6">
                                 <label class="block text-gray-700 mb-2" for="message">Message</label>
-                                <textarea 
+                                <textarea name="message"
                                     id="message" 
                                     rows="5"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
                                     placeholder="Décrivez votre projet..."
                                 ></textarea>
                             </div>
                             
+                            <!-- Optionnel : redirection après soumission 
+                            <input type="hidden" name="redirect" value="https://votresite.com/merci.html">
+                            -->
                             <button 
                                 type="submit" 
                                 class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium"
