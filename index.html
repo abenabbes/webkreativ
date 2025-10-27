@@ -47,10 +47,12 @@
     <!-- ======================== -->
     <script src="./js/tailwind-config.js"></script>
     <script src="./js/main.js"></script>
-    <!--
-    <script src="js/email.min.js"></script>    
-    <script src="js/email.js"></script> 
-  -->
+    <!-- -->
+    <!-- SDK EmailJS -->
+    <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>
+    <script src="./js/email.min.js"></script>    
+    <script src="./js/email.js"></script> 
+  
     <!-- Données structurées JSON-LD (SEO avancé pour Google) -->
      <!--TODO : revoir les liens vers linkedin et github-->
   <script type="application/ld+json">
@@ -359,10 +361,7 @@
                     </div>
                     
                     <div class="scroll-animate">
-                        <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg" 
-                              action="https://api.web3forms.com/submit" method="POST">
-                              <!-- key d'accès Web3Forms -->
-                            <input type="hidden" name="access_key" value="bda86073-5e00-4376-9b7a-4d137183ef5b">
+                        <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg">                            
 
                             <div class="mb-6">
                                 <label class="block text-gray-700 mb-2" for="name">Nom complet</label>

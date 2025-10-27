@@ -13,81 +13,66 @@ function toggleMobileMenu() {
     mobileMenu.classList.toggle('hidden');
 }
 
-// Smooth scroll functions
-function scrollToContact() {
-    document.getElementById('contact').scrollIntoView({ 
-        behavior: 'smooth' 
-    });
-}
-
-function scrollToRealisations() {
-    document.getElementById('realisations').scrollIntoView({ 
-        behavior: 'smooth' 
-    });
+// Smooth scroll
+function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
 
 // Scroll animations
 function initScrollAnimations() {
     const elements = document.querySelectorAll('.scroll-animate');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    elements.forEach(element => {
-        observer.observe(element);
-    });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    elements.forEach(el => observer.observe(el));
 }
 
-// Form handling
+// ✅ Form handling with redirect
 function handleFormSubmit(event) {
     event.preventDefault();
-    alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
-    event.target.reset();
+
+    // Si tu utilises EmailJS, décommente ce bloc :
+    /*
+    emailjs.sendForm('SERVICE_ID', 'TEMPLATE_ID', event.target)
+        .then(() => {
+            window.location.href = 'merci.html';
+        })
+        .catch((error) => {
+            console.error('Erreur EmailJS :', error);
+            alert("Erreur lors de l'envoi du message.");
+        });
+    */
+
+    // Si tu n’utilises pas EmailJS pour l’instant :
+    setTimeout(() => {
+        window.location.href = 'merci.html';
+    }, 500);
 }
 
 // Initialize on load
-document.addEventListener('DOMContentLoaded', function() {
-    // Add smooth scrolling to all links
+document.addEventListener('DOMContentLoaded', () => {
+    // Smooth scroll for anchors
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+        anchor.addEventListener('click', e => {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+            const target = document.querySelector(anchor.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    // Initialize scroll animations
+    // Scroll animations
     initScrollAnimations();
 
-    // Add form submit handler
+    // Handle form submission
     const contactForm = document.querySelector('form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleFormSubmit);
-    }
+    if (contactForm) contactForm.addEventListener('submit', handleFormSubmit);
 
-    // Close mobile menu when clicking on a link
+    // Close mobile menu on link click
     document.querySelectorAll('#mobileMenu a').forEach(link => {
         link.addEventListener('click', () => {
             document.getElementById('mobileMenu').classList.add('hidden');
         });
     });
-});
-
-// Handle navigation with JavaScript
-document.addEventListener('click', function(e) {
-    if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
-        e.preventDefault();
-    }
 });
