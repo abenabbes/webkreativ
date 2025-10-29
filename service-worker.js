@@ -15,7 +15,6 @@ const ASSETS_TO_CACHE = [
   `${ROOT_PATH}offline.html`
 ];
 
-
 // 🔹 Installation du Service Worker
 self.addEventListener('install', event => {
   console.log('📦 Installation du Service Worker et mise en cache des ressources...');
@@ -55,19 +54,29 @@ self.addEventListener('activate', event => {
 
 // 🔹 Interception des requêtes : stratégie "network first" avec fallback cache
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return; // on ignore les requêtes POST (formulaire, EmailJS…)
+  // Ignorer les requêtes non HTTP/HTTPS (ex: chrome-extension://)
+  if (!event.request.url.startsWith('http')) return;
+  if (event.request.method !== 'GET') return; // on ignore POST (formulaire, EmailJS…)
 
   event.respondWith(
     fetch(event.request)
       .then(response => {
         // Si on reçoit une réponse du réseau, on la met en cache
         const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        caches.open(CACHE_NAME).then(cache => {
+          try {
+            cache.put(event.request, clone);
+          } catch (err) {
+            console.warn('⚠️ Impossible de mettre en cache :', event.request.url, err);
+          }
+        });
         return response;
       })
       .catch(() =>
         // Si hors ligne → on sert depuis le cache ou offline.html
-        caches.match(event.request).then(cachedResponse => cachedResponse || caches.match('./offline.html'))
+        caches.match(event.request).then(cachedResponse => 
+          cachedResponse || caches.match(`${ROOT_PATH}offline.html`)
+        )
       )
   );
 });

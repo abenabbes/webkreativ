@@ -53,6 +53,48 @@ function initScrollAnimations() {
 }
 
 // -------------------------------
+// Helper : Affiche une notification de mise à jour
+// -------------------------------
+function showUpdateNotification() {
+  const bar = document.createElement('div');
+  bar.innerHTML = `
+    🔁 Nouvelle version du site disponible.
+    <button id="reloadBtn" style="
+      margin-left:10px;
+      background:#fff;
+      color:#007BFF;
+      border:none;
+      padding:6px 10px;
+      border-radius:4px;
+      cursor:pointer;
+      font-weight:bold;
+    ">Recharger</button>
+  `;
+  Object.assign(bar.style, {
+    position: 'fixed',
+    bottom: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    background: '#007BFF',
+    color: 'white',
+    padding: '12px 16px',
+    borderRadius: '8px',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+    zIndex: 9999,
+    display: 'flex',
+    alignItems: 'center',
+    fontFamily: 'sans-serif',
+  });
+
+  document.body.appendChild(bar);
+
+  document.getElementById('reloadBtn').addEventListener('click', () => {
+    bar.remove();
+    window.location.reload();
+  });
+}
+
+// -------------------------------
 // Init on DOM loaded
 // -------------------------------
 document.addEventListener('DOMContentLoaded', function () {
@@ -83,25 +125,27 @@ document.addEventListener('DOMContentLoaded', function () {
   // -------------------------------
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('./js/service-worker.js')
+      .register('/webkreativ/service-worker.js')
       .then(reg => {
         console.log('✅ Service Worker enregistré :', reg.scope);
 
-        // Vérifie s'il y a une mise à jour
+        // Détection d’une nouvelle version
         reg.onupdatefound = () => {
           const newWorker = reg.installing;
+          if (!newWorker) return;
+
           newWorker.onstatechange = () => {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('🔁 Nouvelle version du site détectée, mise à jour en cours...');
-              newWorker.postMessage({ action: 'skipWaiting' });
+              console.log('🔁 Nouvelle version détectée');
+              showUpdateNotification(); // Affiche la barre de mise à jour
             }
           };
         };
       })
-      .catch(err => console.error('❌ Erreur SW :', err));
+      .catch(err => console.error('❌ Erreur lors de l’enregistrement du SW :', err));
 
     // Recharge la page quand un nouveau SW prend le contrôle
-    let refreshing;
+    let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (refreshing) return;
       refreshing = true;
