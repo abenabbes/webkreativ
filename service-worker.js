@@ -1,5 +1,5 @@
 // 🔹 Nom du cache (avec date pour forcer la mise à jour automatiquement)
-const CACHE_NAME = `webkreativ-cache-${new Date().toISOString().slice(0,10)}`;
+const CACHE_NAME = `webkreativ-cache-${new Date().toISOString().slice(0, 10)}`;
 const ROOT_PATH = '/webkreativ/';
 
 // 🔹 Liste des fichiers à mettre en cache
@@ -15,7 +15,9 @@ const ASSETS_TO_CACHE = [
   `${ROOT_PATH}offline.html`
 ];
 
-// 🔹 Installation du Service Worker
+// -----------------------------
+// INSTALLATION
+// -----------------------------
 self.addEventListener('install', event => {
   console.log('📦 Installation du Service Worker et mise en cache des ressources...');
   event.waitUntil(
@@ -30,10 +32,12 @@ self.addEventListener('install', event => {
       }
     })
   );
-  self.skipWaiting(); // activation immédiate du nouveau SW
+  self.skipWaiting(); // activation immédiate
 });
 
-// 🔹 Activation : nettoyage des anciens caches
+// -----------------------------
+// ACTIVATION
+// -----------------------------
 self.addEventListener('activate', event => {
   console.log('🧹 Nettoyage des anciens caches...');
   event.waitUntil(
@@ -52,31 +56,72 @@ self.addEventListener('activate', event => {
   console.log(`🆕 Service Worker actif – Cache utilisé : ${CACHE_NAME}`);
 });
 
-// 🔹 Interception des requêtes : stratégie "network first" avec fallback cache
+// -----------------------------
+// FETCH (interception des requêtes)
+// -----------------------------
 self.addEventListener('fetch', event => {
-  // Ignorer les requêtes non HTTP/HTTPS (ex: chrome-extension://)
-  if (!event.request.url.startsWith('http')) return;
-  if (event.request.method !== 'GET') return; // on ignore POST (formulaire, EmailJS…)
+  const req = event.request;
 
+  // Ignorer les requêtes non HTTP/HTTPS (chrome-extension://, blob:, etc.)
+  if (!req.url.startsWith('http')) return;
+
+  // Ignorer les requêtes POST (formulaires, EmailJS, etc.)
+  if (req.method !== 'GET') return;
+
+  // 📄 Stratégie Network First pour les pages HTML
+  if (req.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      fetch(req)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            try {
+              cache.put(req, clone);
+            } catch (err) {
+              console.warn('⚠️ Impossible de mettre en cache :', req.url, err);
+            }
+          });
+          return response;
+        })
+        .catch(() => 
+          caches.match(req).then(cached => cached || caches.match(`${ROOT_PATH}offline.html`))
+        )
+    );
+    return;
+  }
+
+  // 🧩 Stratégie Cache First pour CSS, JS, images, etc.
   event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        // Si on reçoit une réponse du réseau, on la met en cache
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          try {
-            cache.put(event.request, clone);
-          } catch (err) {
-            console.warn('⚠️ Impossible de mettre en cache :', event.request.url, err);
+    caches.match(req).then(cachedResponse => {
+      if (cachedResponse) return cachedResponse;
+
+      return fetch(req)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            try {
+              cache.put(req, clone);
+            } catch (err) {
+              console.warn('⚠️ Impossible de mettre en cache :', req.url, err);
+            }
+          });
+          return response;
+        })
+        .catch(() => {
+          // fallback offline uniquement pour les requêtes HTML
+          if (req.headers.get('accept')?.includes('text/html')) {
+            return caches.match(`${ROOT_PATH}offline.html`);
           }
         });
-        return response;
-      })
-      .catch(() =>
-        // Si hors ligne → on sert depuis le cache ou offline.html
-        caches.match(event.request).then(cachedResponse => 
-          cachedResponse || caches.match(`${ROOT_PATH}offline.html`)
-        )
-      )
+    })
   );
+});
+
+// -----------------------------
+// MESSAGE (mise à jour instantanée)
+// -----------------------------
+self.addEventListener('message', event => {
+  if (event.data?.action === 'skipWaiting') {
+    self.skipWaiting();
+  }
 });
