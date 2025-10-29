@@ -1,0 +1,6 @@
+# Indiquer à tous les robots qu'ils peuvent explorer l'ensemble du site.
+User-agent: *
+Allow: /
+
+# Indiquer l'emplacement du sitemap pour aider les robots à trouver toutes vos pages.
+Sitemap: https://abenabbes.github.io/portfolio/sitemap.xml
