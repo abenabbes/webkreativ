@@ -1,5 +1,5 @@
 // Nom du cache (incrémentez à chaque mise à jour du site)
-const CACHE_NAME = 'abenabbes-v6';
+const CACHE_NAME = 'abenabbes-v7';
 
 // Liste des fichiers à mettre en cache
 const ASSETS_TO_CACHE = [
