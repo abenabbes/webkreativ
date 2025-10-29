@@ -6,7 +6,9 @@ const ROOT_PATH = '/webkreativ/';
 const ASSETS_TO_CACHE = [
   `${ROOT_PATH}`,
   `${ROOT_PATH}index.html`,
+  `${ROOT_PATH}merci.html`,
   `${ROOT_PATH}css/style-site.css`,
+  `${ROOT_PATH}css/offline.css`,
   `${ROOT_PATH}js/main.js`,
   `${ROOT_PATH}js/email.js`,
   `${ROOT_PATH}site.webmanifest`,
