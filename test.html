@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merci - WebKreativ</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animation fade-in */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      backface-visibility: hidden; /* texte plus net */
+      -webkit-font-smoothing: subpixel-antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Confettis */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #FACC15; /* jaune */
+      top: 0;
+      animation: fall 3s linear infinite;
+      border-radius: 50%;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(100vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-primary text-white font-sans antialiased relative overflow-hidden">
+
+  <!-- Confettis -->
+  <script>
+    const colors = ['#FACC15', '#3B82F6', '#EF4444', '#10B981', '#8B5CF6'];
+    for(let i=0; i<30; i++){
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.backgroundColor = colors[Math.floor(Math.random()*colors.length)];
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDelay = Math.random() * 2 + 's';
+      confetti.style.width = confetti.style.height = Math.random() * 8 + 5 + 'px';
+      document.body.appendChild(confetti);
+    }
+  </script>
+
+  <!-- Section Merci -->
+  <section class="h-screen flex flex-col justify-center items-center text-center px-4 relative z-10">
+    <i class="fas fa-check-circle text-6xl text-accent mb-6 fade-in" style="animation-delay: 0.2s;"></i>
+    <h1 class="text-5xl lg:text-6xl font-bold mb-4 text-white fade-in" style="animation-delay: 0.4s;">
+      Merci pour votre message !
+    </h1>
+    <p class="text-xl text-gray-100 mb-8 fade-in" style="animation-delay: 0.6s;">
+      Votre demande a bien été envoyée.<br>
+      Je vous recontacterai dans les plus brefs délais.
+    </p>
+    <a href="index.html"
+       class="inline-block bg-white text-primary px-8 py-3 rounded-lg font-medium hover:bg-blue-100 transition-colors fade-in"
+       style="animation-delay: 0.8s;">
+      Retour à l'accueil
+    </a>
+  </section>
+
+  <!-- Footer simplifié pour cohérence -->
+  <footer class="bg-gray-800 text-white py-6 mt-auto relative z-10">
+    <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400 mb-4 md:mb-0">© 2025 WebKreativ. Tous droits réservés.</p>
+      <div class="flex space-x-6">
+        <a href="https://github.com/abenabbes" target="_blank" rel="noopener noreferrer"
+           class="text-gray-400 hover:text-white transition-colors" aria-label="GitHub">
+          <i class="fab fa-github text-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/abenabbes" target="_blank" rel="noopener noreferrer"
+           class="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+          <i class="fab fa-linkedin text-2xl"></i>
+        </a>
+        <a href="https://twitter.com/abenabbes" target="_blank" rel="noopener noreferrer"
+           class="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
+          <i class="fab fa-twitter text-2xl"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -299,7 +299,7 @@
                     <div class="scroll-animate">
                         <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-6">À propos de moi</h2>
                         <p class="text-lg text-gray-600 mb-6">
-                            Passionné par le développement web depuis plus de 5 ans, je me suis spécialisé dans 
+                            Passionné par le développement web depuis plus de 15 ans, je me suis spécialisé dans 
                             la création de sites web statiques modernes et performants. Mon approche allie 
                             esthétique soignée et optimisation technique.
                         </p>
@@ -331,114 +331,182 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- 📨 Section Contact -->
         <section id="contact" class="py-16 bg-primary text-white">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    <div class="scroll-animate">
-                        <h2 class="text-3xl lg:text-4xl font-bold mb-6">Discutons de votre projet</h2>
-                        <p class="text-xl mb-8 text-blue-100">
-                            Prêt à donner vie à votre projet web ? Contactez-moi pour une consultation gratuite.
-                        </p>
-                        
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <i class="fas fa-envelope text-accent text-xl mr-4"></i>
-                                <span class="text-blue-100">contact@webkreativ.fr</span>
-                            </div>
-                            <div class="flex space-x-6 mt-6">
-                                <a href="#" class="text-blue-100 hover:text-white transition-colors">
-                                    <i class="fab fa-github text-2xl"></i>
-                                </a>
-                                <a href="#" class="text-blue-100 hover:text-white transition-colors">
-                                    <i class="fab fa-linkedin text-2xl"></i>
-                                </a>
-                                <a href="#" class="text-blue-100 hover:text-white transition-colors">
-                                    <i class="fab fa-twitter text-2xl"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="scroll-animate">
-                        <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg">                            
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
-                            <div class="mb-6">
-                                <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
-                                <input name="name"
-                                    type="text" 
-                                    id="name" 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                                    placeholder="Votre nom"
-                                >
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label class="block text-gray-700 mb-2" for="email">Email</label>
-                                <input name="email"
-                                    type="email" 
-                                    id="email" 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                                    placeholder="votre@email.com"
-                                >
-                            </div>
+            <!-- 🔹 Bloc gauche : texte + contact + réseaux -->
+            <div class="scroll-animate space-y-8">
 
-                            <div class="mb-6">
-                                <label class="block text-gray-700 mb-2" for="email">Téléphone</label>
-                                <input name="telephone"
-                                    type="tel" 
-                                    id="telephone" 
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                                    placeholder="06 02 03 04 05"
-                                >
-                            </div>
-                            
-                            <div class="mb-6">
-                                <label class="block text-gray-700 mb-2" for="message">Message</label>
-                                <textarea name="message"
-                                    id="message" 
-                                    rows="5"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                                    placeholder="Décrivez votre projet..."
-                                ></textarea>
-                            </div>
-                            
-                            <!-- Optionnel : redirection après soumission 
-                            <input type="hidden" name="redirect" value="https://votresite.com/merci.html">
-                            -->
-                            <button 
-                                type="submit" 
-                                class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium"
-                            >
-                                Envoyer le message
-                            </button>
-                        </form>
-                    </div>
+                <div>
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4">Discutons de votre projet</h2>
+                <p class="text-xl text-blue-100">
+                    Prêt à donner vie à votre projet web ? Contactez-moi pour une consultation gratuite.
+                </p>
+                </div>
+
+                <!-- 🔹 Coordonnées -->
+                <div class="space-y-4">
+                <!-- Email -->
+                <div class="flex items-center bg-white/10 rounded-lg p-3 backdrop-blur-sm hover:bg-white/20 transition">
+                    <i class="fas fa-envelope text-accent text-2xl mr-4"></i>
+                    <a href="mailto:alibenabbes14@gmail.com"
+                    class="text-blue-50 hover:text-white transition-colors text-lg"
+                    aria-label="Envoyer un e-mail à WebKreativ">
+                    contact@webkreativ.fr
+                    </a>
+                </div>
+
+                <!-- Téléphone -->
+                <div class="flex items-center bg-white/10 rounded-lg p-3 backdrop-blur-sm hover:bg-white/20 transition">
+                    <i class="fas fa-phone-alt text-accent text-2xl mr-4"></i>
+                    <a href="tel:+33602030405"
+                    class="text-blue-50 hover:text-white transition-colors text-lg"
+                    aria-label="Appeler WebKreativ">
+                    +33 6 28 45 97 99
+                    </a>
+                </div>
+                </div>
+
+                <!-- 🔹 Réseaux sociaux -->
+                <div class="flex items-center space-x-6 pt-4">
+                <a href="https://github.com/abenabbes"
+                    class="text-blue-100 hover:text-white transition transform hover:scale-110"
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label="Profil GitHub d'Ali BEN ABBES">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/abenabbes"
+                    class="text-blue-100 hover:text-white transition transform hover:scale-110"
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label="Profil LinkedIn d'Ali BEN ABBES">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+
+                <a href="https://twitter.com/abenabbes"
+                    class="text-blue-100 hover:text-white transition transform hover:scale-110"
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label="Profil Twitter d'Ali BEN ABBES">
+                    <i class="fab fa-twitter text-2xl"></i>
+                </a>
                 </div>
             </div>
-        </section>
+
+            <!-- 🔹 Bloc droit : formulaire -->
+            <div class="scroll-animate animate-fadeIn delay-200">
+                <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg">
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
+                    <input name="name" type="text" id="name" placeholder="Votre nom"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
+                           required>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="email">Email</label>
+                    <input name="email" type="email" id="email" placeholder="votre@email.com"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
+                           required>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="telephone">Téléphone</label>
+                    <input name="telephone" type="tel" id="telephone" placeholder="06 02 03 04 05"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
+                           required >
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="message">Message</label>
+                    <textarea name="message" id="message" rows="5" placeholder="Décrivez votre projet..."
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
+                              required></textarea>
+                </div>
+
+                <button id="submitBtn" type="submit"
+                        class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium">
+                    Envoyer le message
+                </button>
+
+                <!-- Message visuel -->
+                <p id="formMessage" class="text-center text-gray-600 mt-4 hidden"></p>
+
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-xl font-bold">WebKreativ</h3>
-                    <p class="text-gray-400 mt-2">© 2024 Tous droits réservés</p>
-                </div>
-                
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
+    <!-- ========================= -->
+    <!-- 🌐 Footer amélioré -->
+    <!-- ========================= -->
+    <footer class="bg-gray-900 text-gray-300 py-10">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+
+        <!-- 🔹 Bloc gauche : logo + droits -->
+        <div>
+            <h3 class="text-2xl font-bold text-white mb-2">WebKreativ</h3>
+            <p class="text-gray-400">
+            Création de sites web modernes et performants.<br>
+            <span class="block mt-2 text-sm text-gray-500">
+                © 2025 Ali BEN ABBES — Tous droits réservés
+            </span>
+            </p>
+        </div>
+
+        <!-- 🔹 Bloc centre : navigation secondaire -->
+        <div>
+            <h4 class="text-lg font-semibold text-white mb-3">Navigation</h4>
+            <ul class="space-y-2">
+            <li><a href="#accueil" class="hover:text-accent transition-colors">Accueil</a></li>
+            <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
+            <li><a href="#realisations" class="hover:text-accent transition-colors">Réalisations</a></li>
+            <li><a href="#apropos" class="hover:text-accent transition-colors">À propos</a></li>
+            <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- 🔹 Bloc droit : réseaux sociaux -->
+        <div>
+            <h4 class="text-lg font-semibold text-white mb-3">Réseaux</h4>
+            <div class="flex justify-center md:justify-start space-x-6">
+            <a href="https://github.com/abenabbes"
+                class="text-gray-400 hover:text-white transition-colors"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Profil GitHub d'Ali BEN ABBES">
+                <i class="fab fa-github text-2xl"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/abenabbes"
+                class="text-gray-400 hover:text-white transition-colors"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Profil LinkedIn d'Ali BEN ABBES">
+                <i class="fab fa-linkedin text-2xl"></i>
+            </a>
+
+            <a href="https://twitter.com/abenabbes"
+                class="text-gray-400 hover:text-white transition-colors"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="Profil Twitter d'Ali BEN ABBES">
+                <i class="fab fa-twitter text-2xl"></i>
+            </a>
             </div>
         </div>
+        </div>
+
+        <!-- 🔸 Ligne de séparation -->
+        <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
+        Propulsé avec ❤️ par <span class="text-white font-medium">WebKreativ</span>
+        </div>
+    </div>
     </footer>
+
     
 </body>
 </html>
