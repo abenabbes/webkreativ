@@ -1,32 +1,30 @@
+// email.js
 document.addEventListener("DOMContentLoaded", function () {
-  emailjs.init({ publicKey: "xFNikoKE7n7chXIgE" });
+    // Initialisation EmailJS avec ta clé publique
+    emailjs.init("xFNikoKE7n7chXIgE");
 
-  const form = document.getElementById('contactForm');
-  const btn = document.getElementById('submitBtn');
-  const msg = document.getElementById('formMessage');
+    const form = document.getElementById("contactForm");
 
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    if (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-      // Vérif anti-bot
-      if (document.getElementById('bot-field').value) return;
+            // Désactiver le bouton pendant l'envoi
+            const submitBtn = form.querySelector("button[type='submit']");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Envoi en cours...";
 
-      btn.disabled = true;
-      btn.textContent = 'Envoi en cours...';
-      msg.classList.add('hidden');
-
-      emailjs.sendForm('service_s8xelha', 'template_pfxbnlb', this)
-        .then(() => {
-          window.location.href = 'https://abenabbes.github.io/webkreativ/merci.html';
-        })
-        .catch((error) => {
-          msg.textContent = "❌ Une erreur est survenue. Réessayez plus tard.";
-          msg.classList.remove('hidden');
-          btn.disabled = false;
-          btn.textContent = 'Envoyer le message';
-          console.error(error);
+             emailjs.sendForm('service_9w7ytnw', 'template_itmi7ql', this)
+                .then(() => {
+                    console.log("✅ E-mail envoyé avec succès !");
+                    window.location.href = "https://abenabbes.github.io/webkreativ/merci.html";
+                })
+                .catch((error) => {
+                    console.error("❌ Erreur d'envoi :", error);
+                    alert("Une erreur est survenue lors de l'envoi. Veuillez réessayer.");
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "Envoyer le message";
+                });
         });
-    });
-  }
+    }
 });
