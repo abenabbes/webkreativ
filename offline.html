@@ -3,18 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hors-ligne - Web Kreativ</title>
-  <link rel="stylesheet" href="./css/style-site.css">
-  <style>
-    body { text-align: center; padding: 50px; font-family: sans-serif; }
-    h1 { font-size: 2rem; color: #333; }
-    p { font-size: 1.2rem; color: #666; }
-    a { color: #007bff; text-decoration: none; }
-  </style>
+  <title>Hors ligne - WebKreativ</title>
+
+  <!-- Tailwind pour un style rapide et cohérent -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./css/offline.css">  
 </head>
+
 <body>
-  <h1>Vous êtes hors-ligne</h1>
-  <p>Le site n'est pas accessible pour le moment.</p>
-  <p><a href="./">Recharger la page</a></p>
+  <div class="offline-box">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-16 h-16 mx-auto mb-4 text-blue-400">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75l4.5 4.5 15-15" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 9.75l9 9L21.75 9.75" />
+    </svg>
+
+    <h1>Vous êtes hors ligne</h1>
+    <p>Il semble que votre connexion Internet soit coupée.<br>
+    Revenez en ligne pour accéder à toutes les fonctionnalités.</p>
+
+    <a href="./">Recharger la page</a>
+  </div>
+
+  <footer class="mt-8 text-gray-400 text-sm">
+    © 2025 WebKreativ — Tous droits réservés.
+  </footer>
 </body>
 </html>
