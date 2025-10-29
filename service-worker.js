@@ -1,18 +1,20 @@
 // 🔹 Nom du cache (avec date pour forcer la mise à jour automatiquement)
 const CACHE_NAME = `webkreativ-cache-${new Date().toISOString().slice(0,10)}`;
+const ROOT_PATH = '/webkreativ/';
 
 // 🔹 Liste des fichiers à mettre en cache
 const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
-  './css/style-site.css',
-  './js/main.js',
-  './js/email.js',
-  './site.webmanifest',
-  './favicon/web-app-manifest-192x192.png',
-  './favicon/web-app-manifest-512x512.png',
-  './offline.html'
+  `${ROOT_PATH}`,
+  `${ROOT_PATH}index.html`,
+  `${ROOT_PATH}css/style-site.css`,
+  `${ROOT_PATH}js/main.js`,
+  `${ROOT_PATH}js/email.js`,
+  `${ROOT_PATH}site.webmanifest`,
+  `${ROOT_PATH}favicon/web-app-manifest-192x192.png`,
+  `${ROOT_PATH}favicon/web-app-manifest-512x512.png`,
+  `${ROOT_PATH}offline.html`
 ];
+
 
 // 🔹 Installation du Service Worker
 self.addEventListener('install', event => {
@@ -48,6 +50,7 @@ self.addEventListener('activate', event => {
     )
   );
   self.clients.claim(); // prend le contrôle sans rechargement
+  console.log(`🆕 Service Worker actif – Cache utilisé : ${CACHE_NAME}`);
 });
 
 // 🔹 Interception des requêtes : stratégie "network first" avec fallback cache
