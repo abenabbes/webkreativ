@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dar El Medina - Restaurant Tunisien Authentique</title>
+    <meta name="description" content="Découvrez les saveurs authentiques de la Tunisie dans notre restaurant. Plats traditionnels, ambiance chaleureuse et service exceptionnel.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#D4AF37",
+                        secondary: "#8B0000",
+                        accent: "#FFD700",
+                        dark: "#2C2C2C",
+                        light: "#F8F8F8"
+                    },
+                    fontFamily: {
+                        'arabic': ['"Amiri"', 'serif'],
+                        'body': ['"Open Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+	
+	<!-- Script EmailJS : pour intéger l'envoi de mail -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+	<script type="text/javascript">
+	   (function() {
+		  // Initialiser avec votre Public Key
+		  emailjs.init({
+			 publicKey: "308KNvDrpU6XfF-Ky",
+		  });
+	   })();
+	</script>
+	<script type="text/javascript">
+		// Attendre que le document soit chargé
+		window.onload = function() {
+			// Cibler votre formulaire par son ID
+			document.getElementById('contactForm').addEventListener('submit', function(event) {
+				event.preventDefault(); // EMPÊCHE la soumission HTML par défaut (et la redirection Formspree !)
+
+				// Envoyer le formulaire avec EmailJS
+				// emailjs.sendForm('VOTRE_SERVICE_ID', 'VOTRE_TEMPLATE_ID', this)
+				emailjs.sendForm('service_s8xelha', 'template_pfxbnlb', this)
+					.then(function() {
+						console.log('E-mail envoyé avec succès !');
+
+						// **********************************************
+						// C'EST ICI QUE VOUS FAITES LA REDIRECTION !
+						// **********************************************
+						window.location.href = 'https://abenabbes.github.io/portfolio/remerciment.html';
+						
+					}, function(error) {
+						console.log('ÉCHEC de l\'envoi...', error);
+						// Optionnel : Afficher un message d'erreur
+						alert("Une erreur est survenue lors de l'envoi.");
+					});
+			});
+		}
+	</script>
+</head>
+<body class="font-body bg-light text-dark min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-secondary font-arabic">دار المدينة</h1>
+                    <span class="ml-2 text-lg text-primary">Dar El Medina</span>
+                </div>
+                
+                <!-- Navigation Desktop -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#accueil" class="text-dark hover:text-primary transition-colors duration-300 font-semibold">Accueil</a>
+                    <a href="#menu" class="text-dark hover:text-primary transition-colors duration-300 font-semibold">Menu</a>
+                    <a href="#a-propos" class="text-dark hover:text-primary transition-colors duration-300 font-semibold">À Propos</a>
+                    <a href="#contact" class="text-dark hover:text-primary transition-colors duration-300 font-semibold">Contact</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="bg-primary text-white px-6 py-2 rounded-full hover:bg-secondary transition-colors duration-300 font-semibold">
+                        <a href="#contact" >Réserver</a>
+                    </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuButton" class="md:hidden text-dark">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4 border-t pt-4">
+                <a href="#accueil" class="block text-dark hover:text-primary transition-colors duration-300 font-semibold">Accueil</a>
+                <a href="#menu" class="block text-dark hover:text-primary transition-colors duration-300 font-semibold">Menu</a>
+                <a href="#a-propos" class="block text-dark hover:text-primary transition-colors duration-300 font-semibold">À Propos</a>
+                <a href="#contact" class="block text-dark hover:text-primary transition-colors duration-300 font-semibold">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="relative bg-cover bg-center h-96" style="background-image: url('https://picsum.photos/1200/600?random=1')">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative container mx-auto px-4 h-full flex items-center">
+            <div class="text-white max-w-2xl">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 font-arabic">أهلاً وسهلاً</h2>
+                <h3 class="text-3xl md:text-4xl font-bold mb-6">Bienvenue au Dar El Medina</h3>
+                <p class="text-xl mb-8">Découvrez l'authenticité des saveurs tunisiennes dans une ambiance chaleureuse et conviviale.</p>
+                <div class="flex space-x-4">
+                    <button class="bg-primary text-white px-8 py-3 rounded-full hover:bg-secondary transition-colors duration-300 font-semibold">
+                        Voir le Menu
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-dark transition-colors duration-300 font-semibold">
+                        Nous Visiter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialités Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">Nos Spécialités</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Des plats traditionnels préparés avec des ingrédients frais et des recettes transmises de génération en génération.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Couscous -->
+                <div class="bg-light rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://picsum.photos/400/300?random=2" alt="Couscous traditionnel tunisien" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Couscous</h3>
+                        <p class="text-gray-600 mb-4">Le plat emblématique de la Tunisie, préparé avec des légumes frais et de la viande tendre.</p>
+                        <span class="text-primary font-semibold text-lg">18€</span>
+                    </div>
+                </div>
+                
+                <!-- Brik -->
+                <div class="bg-light rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://picsum.photos/400/300?random=3" alt="Brik à l'oeuf" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Brik à l'Oeuf</h3>
+                        <p class="text-gray-600 mb-4">Feuille de brick croustillante garnie d'oeuf, thon et persil.</p>
+                        <span class="text-primary font-semibold text-lg">8€</span>
+                    </div>
+                </div>
+                
+                <!-- Méchoui -->
+                <div class="bg-light rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <img src="https://picsum.photos/400/300?random=4" alt="Méchoui d'agneau" class="w-full h-48 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-secondary mb-2">Méchoui d'Agneau</h3>
+                        <p class="text-gray-600 mb-4">Agneau rôti lentement aux épices tunisiennes, tendre et parfumé.</p>
+                        <span class="text-primary font-semibold text-lg">24€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Notre Menu</h2>
+                <p class="text-lg opacity-90 max-w-2xl mx-auto">Découvrez notre sélection de plats traditionnels et modernes.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Entrées -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-accent">Entrées</h3>
+                    <div class="space-y-6">
+                        <div class="border-b border-gray-600 pb-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-1">Salade Méchouia</h4>
+                                    <p class="text-gray-300 text-sm">Poivrons grillés, tomates, ail et épices</p>
+                                </div>
+                                <span class="text-accent font-bold">7€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-600 pb-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-1">Lablabi</h4>
+                                    <p class="text-gray-300 text-sm">Soupe de pois chiches à la tunisienne</p>
+                                </div>
+                                <span class="text-accent font-bold">6€</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Plats Principaux -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-accent">Plats Principaux</h3>
+                    <div class="space-y-6">
+                        <div class="border-b border-gray-600 pb-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-1">Tajine</h4>
+                                    <p class="text-gray-300 text-sm">Ragoût mijoté aux oeufs et fromage</p>
+                                </div>
+                                <span class="text-accent font-bold">16€</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border-b border-gray-600 pb-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-1">Poisson Grillé</h4>
+                                    <p class="text-gray-300 text-sm">Poisson de la Méditerranée aux épices</p>
+                                </div>
+                                <span class="text-accent font-bold">22€</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À Propos Section -->
+    <section id="a-propos" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://picsum.photos/600/400?random=5" alt="Intérieur du restaurant Dar El Medina" class="w-full rounded-lg shadow-lg" loading="lazy">
+            </div>
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-6">Notre Histoire</h2>
+                <p class="text-lg text-gray-600 mb-4">
+                    Fondé en 2010, Dar El Medina est bien plus qu'un restaurant - c'est une passion pour la cuisine tunisienne authentique. Notre chef, Mohamed, a grandi dans les ruelles de la médina de Tunis, où il a appris les secrets des recettes familiales.
+                </p>
+                <p class="text-lg text-gray-600 mb-6">
+                    Nous sélectionnons rigoureusement nos ingrédients et utilisons des épices importées directement de Tunisie pour vous offrir une expérience culinaire inoubliable.
+                </p>
+                <div class="flex space-x-4">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary">13+</div>
+                        <div class="text-gray-600">Années d'expérience</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary">50+</div>
+                        <div class="text-gray-600">Plats traditionnels</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary">1000+</div>
+                        <div class="text-gray-600">Clients satisfaits</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-secondary mb-4">Contact & Réservations</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Informations de contact -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-secondary">Nous Trouver</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-primary mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-semibold">123 Rue de la Médina</p>
+                                <p class="text-gray-600">75001 Paris, France</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-primary mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-semibold">Téléphone</p>
+                                <p class="text-gray-600">+33 1 23 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-primary mr-4 text-xl"></i>
+                            <div>
+                                <p class="font-semibold">Horaires</p>
+                                <p class="text-gray-600">Lun-Dim: 12h-14h30 / 19h-23h</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="text-xl font-bold mb-4 text-secondary">Suivez-nous</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-primary text-white p-3 rounded-full hover:bg-secondary transition-colors duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white p-3 rounded-full hover:bg-secondary transition-colors duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white p-3 rounded-full hover:bg-secondary transition-colors duration-300">
+                                <i class="fab fa-tripadvisor"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formulaire de réservation -->
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-secondary">Réserver une table</h3>
+                    <form id="contactForm">					 
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input name="nom" type="text" placeholder="Nom" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            <input name="prenom" type="text" placeholder="Prénom" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <input name="email" type="email" placeholder="Email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <input name="tel" type="tel" placeholder="Téléphone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input name="date" type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            <input name="time" type="time" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <select name="nbrpers" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                                    <option value="">Nombre de personnes</option>
+                                    <option value="1">1 personne</option>
+                                    <option value="2">2 personnes</option>
+                                    <option value="3">3 personnes</option>
+                                    <option value="4">4 personnes</option>
+                                    <option value="5">5 personnes</option>
+                                    <option value="6+">6+ personnes</option>
+                                </select>
+                                <button type="submit" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-secondary transition-colors duration-300 font-semibold">
+                                    Réserver
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-primary">Dar El Medina</h4>
+                        <p class="text-gray-400">Restaurant Tunisien Authentique</p>
+                        <p class="text-gray-400 mt-2">Saveurs traditionnelles, ambiance chaleureuse</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-primary">Navigation</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#accueil" class="text-gray-400 hover:text-primary transition-colors duration-300">Accueil</a></li>
+                            <li><a href="#menu" class="text-gray-400 hover:text-primary transition-colors duration-300">Menu</a></li>
+                            <li><a href="#a-propos" class="text-gray-400 hover:text-primary transition-colors duration-300">À Propos</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors duration-300">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-primary">Contact</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>123 Rue de la Médina</li>
+                            <li>75001 Paris</li>
+                            <li>+33 1 23 45 67 89</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-primary">Horaires</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>Lundi - Dimanche</li>
+                            <li>12h00 - 14h30</li>
+                            <li>19h00 - 23h00</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 Dar El Medina. Tous droits réservés.</p>
+                </div>
+            </div>
+        </footer>
+        
+        <script>
+            // Menu mobile
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Navigation smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Données du menu
+            const menuData = {
+                "entrees": [
+                    { "nom": "Salade Méchouia", "description": "Poivrons grillés, tomates, ail et épices", "prix": "7€" },
+                    { "nom": "Lablabi", "description": "Soupe de pois chiches à la tunisienne", "prix": "6€" },
+                    { "nom": "Brik à l'Oeuf", "description": "Feuille de brick croustillante garnie", "prix": "8€" }
+                ],
+                "plats": [
+                    { "nom": "Couscous", "description": "Plat traditionnel aux légumes et viande", "prix": "18€" },
+                    { "nom": "Tajine", "description": "Ragoût mijoté aux oeufs et fromage", "prix": "16€" },
+                    { "nom": "Méchoui d'Agneau", "description": "Agneau rôti aux épices tunisiennes", "prix": "24€" },
+                    { "nom": "Poisson Grillé", "description": "Poisson de la Méditerranée aux épices", "prix": "22€" }
+                ]
+            };
+        </script>
+    </body>
+    </html>
