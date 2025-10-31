@@ -9,9 +9,13 @@ on:
 jobs:
   minify:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Cette ligne est importante !
     
     steps:
     - uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Setup Node.js
       uses: actions/setup-node@v3
@@ -22,13 +26,6 @@ jobs:
       run: |
         npm install cssnano-cli
         npm install terser
-    
-    - name: List files in directories
-      run: |
-        echo "=== FICHIERS CSS ==="
-        ls -la css/
-        echo "=== FICHIERS JS ==="
-        ls -la js/
     
     - name: Minify CSS files
       run: |
@@ -42,17 +39,10 @@ jobs:
         npx terser js/main.js -o js/main.min.js
         npx terser js/tailwind-config.js -o js/tailwind-config.min.js
     
-    - name: Verify minified files created
-      run: |
-        echo "=== FICHIERS MINIFIÉS CRÉÉS ==="
-        ls -la css/*.min.css
-        ls -la js/*.min.js
-    
-    - name: Commit minified files
-      continue-on-error: true
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add css/*.min.css js/*.min.js
-        git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify CSS and JS files"
-        git push
+    - name: Upload minified files as artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: minified-files
+        path: |
+          css/*.min.css
+          js/*.min.js
