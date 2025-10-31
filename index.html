@@ -32,14 +32,15 @@
     <!-- CSS -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style-site.min.css">
     <!-- Préconnect réduit le temps de résolution DNS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- ========= JS =========== -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -92,13 +93,15 @@
                     <a href="#realisations" class="text-gray-600 hover:text-primary transition-colors">Réalisations</a>
                     <a href="#apropos" class="text-gray-600 hover:text-primary transition-colors">À propos</a>
                     <a href="#contact" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
-                    <button onclick="scrollToContact()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
+                    <button onclick="scrollToContact()" class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                            aria-label="Demander un devis">
                         Demander un devis
                     </button>
                 </div>
                 
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()">
+                <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()"
+                        aria-label="Menu mobile" aria-expanded="false">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
