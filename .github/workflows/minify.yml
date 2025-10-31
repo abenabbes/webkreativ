@@ -20,25 +20,39 @@ jobs:
     
     - name: Install dependencies
       run: |
-        npm install -g cssnano-cli
-        npm install -g terser
+        npm install cssnano-cli
+        npm install terser
     
-    - name: Minify CSS
+    - name: List files in directories
       run: |
-        cssnano merci.css merci.min.css
-        cssnano offline.css offline.min.css
-        cssnano style-site.css style-site.min.css
+        echo "=== FICHIERS CSS ==="
+        ls -la css/
+        echo "=== FICHIERS JS ==="
+        ls -la js/
     
-    - name: Minify JS
+    - name: Minify CSS files
       run: |
-        terser email.js -o email.min.js
-        terser main.js -o main.min.js
-        terser tailwind-config.js -o tailwind-config.min.js
+        npx cssnano css/merci.css css/merci.min.css
+        npx cssnano css/offline.css css/offline.min.css
+        npx cssnano css/style-site.css css/style-site.min.css
+    
+    - name: Minify JS files
+      run: |
+        npx terser js/email.js -o js/email.min.js
+        npx terser js/main.js -o js/main.min.js
+        npx terser js/tailwind-config.js -o js/tailwind-config.min.js
+    
+    - name: Verify minified files created
+      run: |
+        echo "=== FICHIERS MINIFIÉS CRÉÉS ==="
+        ls -la css/*.min.css
+        ls -la js/*.min.js
     
     - name: Commit minified files
+      continue-on-error: true
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add *.min.css *.min.js
+        git add css/*.min.css js/*.min.js
         git diff --quiet && git diff --staged --quiet || git commit -m "Auto-minify CSS and JS files"
         git push
