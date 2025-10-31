@@ -10,15 +10,15 @@ jobs:
   minify:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Cette ligne est importante !
+      contents: write
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '18'
     
@@ -39,10 +39,9 @@ jobs:
         npx terser js/main.js -o js/main.min.js
         npx terser js/tailwind-config.js -o js/tailwind-config.min.js
     
-    - name: Upload minified files as artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: minified-files
-        path: |
-          css/*.min.css
-          js/*.min.js
+    - name: Commit and push minified files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add css/*.min.css js/*.min.js
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-minify CSS and JS files" && git push)
