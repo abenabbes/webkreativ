@@ -483,56 +483,25 @@
     </div>
     </footer>
 
-    <!-- Charger le SDK EmailJS via CDN, avec fallback local si le CDN est bloqué -->
-    <script>
-    (function() {
-      // URL CDN stable
-      var cdnUrl = 'https://cdn.emailjs.com/sdk/3.2.0/email.min.js';
-      var localFallback = './js/email.min.js'; // si tu commits le fichier local
-      var publicKey = 'xFNikoKE7n7chXIgE'; // ta clé publique
+    <!-- Charger SDK EmailJS localement (fallback) -->
+<script src="./js/email.min.js"></script>
+<script>
+  try {
+    if (typeof window.emailjs !== 'undefined') {
+      if (!emailjs._inited) { emailjs.init('xFNikoKE7n7chXIgE'); emailjs._inited = true; }
+      console.log('✅ EmailJS initialisé (local)');
+    } else {
+      console.error('EmailJS non exposé après chargement local.');
+    }
+  } catch (e) {
+    console.error('Erreur init EmailJS local:', e);
+  }
+</script>
 
-      function initEmailJs() {
-        try {
-          if (typeof window.emailjs !== 'undefined') {
-            // Evite double init si déjà initialisé
-            if (!emailjs._inited) {
-              emailjs.init(publicKey);
-              emailjs._inited = true;
-              console.log('✅ EmailJS initialisé');
-            }
-          } else {
-            console.error('EmailJS présent mais non exposé sur window');
-          }
-        } catch (e) {
-          console.error('Erreur during emailjs.init():', e);
-        }
-      }
-
-      // Charger le script CDN puis init ; si erreur -> charger localement
-      var s = document.createElement('script');
-      s.src = cdnUrl;
-      s.async = true;
-      s.onload = function() { initEmailJs(); };
-      s.onerror = function() {
-        console.warn('CDN EmailJS inaccessible — tentative de fallback local...');
-        var fallback = document.createElement('script');
-        fallback.src = localFallback;
-        fallback.async = true;
-        fallback.onload = function() { initEmailJs(); };
-        fallback.onerror = function() {
-          console.error('Le fallback local email.min.js a échoué. Vérifie que ./js/email.min.js existe dans le repo.');
-        };
-        document.head.appendChild(fallback);
-      };
-      document.head.appendChild(s);
-    })();
-    </script>
-
-    <!-- Ensuite tes scripts applicatifs (après que le SDK a été demandé --> -->
-    <script src="./js/tailwind-config.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./js/email.js"></script>
-
+<!-- puis tes scripts -->
+<script src="./js/tailwind-config.js"></script>
+<script src="./js/main.js"></script>
+<script src="./js/email.js"></script>
     
   <!-- Appel aus service worker -->
     <script>
