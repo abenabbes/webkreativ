@@ -43,11 +43,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- JS-->     
+   <!-- Charger d'abord le SDK EmailJS (version stable) -->
+    <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+
+    <!-- Initialiser EmailJS dès que possible -->
+    <script>
+    if (typeof window.emailjs !== 'undefined') {
+        emailjs.init('xFNikoKE7n7chXIgE');
+    } else {
+        console.error('EmailJS SDK non chargé — vérifier la connexion CDN');
+    }
+    </script>
+
+    <!-- Ensuite tes scripts qui utilisent emailjs -->
     <script src="./js/tailwind-config.js"></script>
-    <script src="./js/main.js"></script>    
-    <!-- SDK EmailJS -->
-    <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>        
-    <script src="./js/email.js"></script> 
+    <script src="./js/main.js"></script>
+    <script src="./js/email.js"></script>
+
 
 
      <!-- Données structurées JSON-LD (SEO avancé pour Google) -->
