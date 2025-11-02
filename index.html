@@ -43,10 +43,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- JS-->     
-    <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>  
     <script src="./js/tailwind-config.js"></script>
-    <script src="./js/main.js"></script>           
+    <script src="./js/main.js"></script>    
+    <!-- SDK EmailJS -->
+    <script src="https://cdn.emailjs.com/sdk/3.2/email.min.js"></script>        
     <script src="./js/email.js"></script> 
+
 
      <!-- Données structurées JSON-LD (SEO avancé pour Google) -->
      <!--TODO : revoir les liens vers linkedin et github-->
@@ -393,7 +395,7 @@
 
             <!-- 🔹 Bloc droit : formulaire -->
             <div class="scroll-animate animate-fadeIn delay-200">
-                <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg">
+                <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg" method="POST">
 
                 <div class="mb-6">
                     <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
