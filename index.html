@@ -42,28 +42,8 @@
     <!-- ========= JS =========== -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- JS-->     
-   <!-- Charger d'abord le SDK EmailJS (version stable) -->
-    <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
-
-    <!-- Initialiser EmailJS dès que possible -->
-    <script>
-    if (typeof window.emailjs !== 'undefined') {
-        emailjs.init('xFNikoKE7n7chXIgE');
-    } else {
-        console.error('EmailJS SDK non chargé — vérifier la connexion CDN');
-    }
-    </script>
-
-    <!-- Ensuite tes scripts qui utilisent emailjs -->
-    <script src="./js/tailwind-config.js"></script>
-    <script src="./js/main.js"></script>
-    <script src="./js/email.min.js"></script>
-
-
-
-     <!-- Données structurées JSON-LD (SEO avancé pour Google) -->
-     <!--TODO : revoir les liens vers linkedin et github-->
+ <!-- Données structurées JSON-LD (SEO avancé pour Google) -->
+ <!--TODO : revoir les liens vers linkedin et github-->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -79,21 +59,6 @@
     ]
   }
   </script>
-
-  <!-- Appel aus service worker -->
- <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-        //const swPath = `${window.location.pathname.replace(/index\.html$/, '')}js/service-worker.js`;
-        const swPath = '/webkreativ/service-worker.js';
-        navigator.serviceWorker.register(swPath)
-            .then(reg => console.log('✅ SW enregistré :', reg.scope))
-            .catch(err => console.error('❌ Erreur SW :', err));
-        });
-    }
- </script>
-
-
 </head>
 <body class="font-poppins bg-white text-gray-800">
     <!-- Header -->
@@ -518,6 +483,69 @@
     </div>
     </footer>
 
+    <!-- Charger le SDK EmailJS via CDN, avec fallback local si le CDN est bloqué -->
+    <script>
+    (function() {
+      // URL CDN stable
+      var cdnUrl = 'https://cdn.emailjs.com/sdk/3.2.0/email.min.js';
+      var localFallback = './js/email.min.js'; // si tu commits le fichier local
+      var publicKey = 'xFNikoKE7n7chXIgE'; // ta clé publique
+
+      function initEmailJs() {
+        try {
+          if (typeof window.emailjs !== 'undefined') {
+            // Evite double init si déjà initialisé
+            if (!emailjs._inited) {
+              emailjs.init(publicKey);
+              emailjs._inited = true;
+              console.log('✅ EmailJS initialisé');
+            }
+          } else {
+            console.error('EmailJS présent mais non exposé sur window');
+          }
+        } catch (e) {
+          console.error('Erreur during emailjs.init():', e);
+        }
+      }
+
+      // Charger le script CDN puis init ; si erreur -> charger localement
+      var s = document.createElement('script');
+      s.src = cdnUrl;
+      s.async = true;
+      s.onload = function() { initEmailJs(); };
+      s.onerror = function() {
+        console.warn('CDN EmailJS inaccessible — tentative de fallback local...');
+        var fallback = document.createElement('script');
+        fallback.src = localFallback;
+        fallback.async = true;
+        fallback.onload = function() { initEmailJs(); };
+        fallback.onerror = function() {
+          console.error('Le fallback local email.min.js a échoué. Vérifie que ./js/email.min.js existe dans le repo.');
+        };
+        document.head.appendChild(fallback);
+      };
+      document.head.appendChild(s);
+    })();
+    </script>
+
+    <!-- Ensuite tes scripts applicatifs (après que le SDK a été demandé --> -->
+    <script src="./js/tailwind-config.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/email.js"></script>
+
+    
+  <!-- Appel aus service worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+            //const swPath = `${window.location.pathname.replace(/index\.html$/, '')}js/service-worker.js`;
+            const swPath = '/webkreativ/service-worker.js';
+            navigator.serviceWorker.register(swPath)
+                .then(reg => console.log('✅ SW enregistré :', reg.scope))
+                .catch(err => console.error('❌ Erreur SW :', err));
+            });
+        }
+    </script>
 </body>
 </html>
     
