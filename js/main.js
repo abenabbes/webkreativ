@@ -120,36 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // -------------------------------
-  // Service Worker Registration
-  // -------------------------------
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register('/webkreativ/service-worker.js')
-      .then(reg => {
-        console.log('✅ Service Worker enregistré :', reg.scope);
+  
+}
 
-        // Détection d’une nouvelle version
-        reg.onupdatefound = () => {
-          const newWorker = reg.installing;
-          if (!newWorker) return;
-
-          newWorker.onstatechange = () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              console.log('🔁 Nouvelle version détectée');
-              showUpdateNotification(); // Affiche la barre de mise à jour
-            }
-          };
-        };
-      })
-      .catch(err => console.error('❌ Erreur lors de l’enregistrement du SW :', err));
-
-    // Recharge la page quand un nouveau SW prend le contrôle
-    let refreshing = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (refreshing) return;
-      refreshing = true;
-      window.location.reload();
-    });
-  }
-});
+);
