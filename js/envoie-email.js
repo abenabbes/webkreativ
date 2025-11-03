@@ -2,7 +2,7 @@
 // Script robuste pour envoyer le formulaire via EmailJS en utilisant emailjs-ready
 
 (function () {
-  const PUBLIC_KEY = 'xFNikoKE7n7chXIgE'; // ta clé publique EmailJS
+  const PUBLIC_KEY = 'xFNikoKE7n7chXIgE';
   const SERVICE_ID = 'service_9w7ytnw';
   const TEMPLATE_ID = 'template_itmi7ql';
 
@@ -34,16 +34,9 @@
     const submitBtn = form.querySelector("button[type='submit']");
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Envoi en cours...';
-      }
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours...'; }
       setFormMessage('Envoi en cours...', 'info');
 
       try {
@@ -54,20 +47,17 @@
       } catch (err) {
         console.error('Erreur envoi EmailJS:', err);
         setFormMessage('Erreur lors de l’envoi. Veuillez réessayer.', 'error');
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Envoyer le message';
-        }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Envoyer le message'; }
       }
     });
   }
 
-  // Attendre que EmailJS soit prêt
+  // Écoute l'événement officiel EmailJS ready
   window.addEventListener('emailjs-ready', function() {
     initForm();
   });
 
-  // Cas où l'événement est peut-être déjà passé (EmailJS rapide)
+  // Cas où EmailJS est déjà prêt
   if (typeof emailjs !== 'undefined' && emailjs._inited) {
     initForm();
   }
