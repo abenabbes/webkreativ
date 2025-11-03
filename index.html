@@ -483,114 +483,19 @@
     </div>
     </footer>
 
-    <!-- ========================================= -->
-  <!-- SCRIPTS (fin de body) - loader EmailJS + SW registration -->
   <!-- ========================================= -->
-
-  <!-- 1) Loader EmailJS CDN avec fallback local puis init -->
-  <script>
-    (function () {
-      const CDN_URL = 'https://cdn.emailjs.com/sdk/3.2.0/email.min.js';
-      const LOCAL_FALLBACK = './js/email.min.js'; // place le fichier local si tu veux
-      const PUBLIC_KEY = 'xFNikoKE7n7chXIgE';
-
-      function initEmailJsIfAvailable() {
-        if (typeof window.emailjs !== 'undefined') {
-          try {
-            if (!emailjs._inited) {
-              emailjs.init(PUBLIC_KEY);
-              emailjs._inited = true;
-              console.info('✅ EmailJS initialisé');
-            }
-          } catch (e) {
-            console.error('Erreur init EmailJS:', e);
-          }
-        } else {
-          console.warn('EmailJS non disponible après chargement du script.');
-        }
-      }
-
-      // Essayez CDN d'abord, si erreur alors fallback local
-      function loadScript(src, onload, onerror) {
-        var s = document.createElement('script');
-        s.src = src;
-        s.async = true;
-        s.onload = onload;
-        s.onerror = onerror;
-        document.head.appendChild(s);
-      }
-
-      loadScript(CDN_URL,
-        function () { initEmailJsIfAvailable(); },
-        function () {
-          console.warn('CDN EmailJS inaccessible, tentative fallback local...');
-          loadScript(LOCAL_FALLBACK, initEmailJsIfAvailable, function () {
-            console.error('Fallback local EmailJS failed. Vérifie ./js/email.min.js');
-          });
-        }
-      );
-    })();
-  </script>
-
-  <!-- 2) Tes scripts applicatifs -->
+  <!-- SCRIPTS (fin de body)                     -->
+  <!-- ========================================= -->
+  
   <script src="./js/tailwind-config.js"></script>
   <script src="./js/main.js"></script>
-  <script src="./js/email.js"></script>
 
-  <!-- 3) Service Worker registration + auto-update handling -->
-  <script>
-    (function () {
-      if ('serviceWorker' in navigator) {
-        // Enregistrer le SW
-        navigator.serviceWorker.register('/webkreativ/service-worker.js')
-          .then(reg => {
-            console.info('✅ Service Worker enregistré (scope):', reg.scope);
+  <!-- ✅ EmailJS SDK (CDN) - doit être chargé avant envoie-email.js -->
+  <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
 
-            // si une nouvelle version est trouvée, demander skipWaiting pour l'installer plus vite
-            reg.addEventListener('updatefound', () => {
-              const newWorker = reg.installing;
-              if (!newWorker) return;
-              newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed') {
-                  // si il y a déjà un contrôleur, c'est une update : on demande l'activation immédiate
-                  if (navigator.serviceWorker.controller) {
-                    try {
-                      newWorker.postMessage({ action: 'skipWaiting' });
-                    } catch (e) {}
-                  }
-                }
-              });
-            });
-          })
-          .catch(err => console.error('❌ Erreur enregistrement SW:', err));
+  <!-- ✅ Ton script d'envoi (séparé) -->
+  <script src="./js/envoie-email.js"></script>
 
-        // Écouter les messages du SW (activate -> reload)
-        navigator.serviceWorker.addEventListener('message', event => {
-          const data = event.data || {};
-          if (data && data.action === 'sw-activated') {
-            // reload automatique sans interaction utilisateur
-            console.info('🔄 Nouveau Service Worker activé (version:', data.version, '). Reload automatique...');
-            try {
-              // Faire un reload pour prendre le nouveau SW en compte
-              window.location.reload(true);
-            } catch (e) {
-              window.location.reload();
-            }
-          }
-        });
-
-        // Si on veut forcer une mise à jour périodique automatique, on peut checker la registration régulièrement.
-        // Exemple (optionnel) : check every 6 hours
-        setInterval(() => {
-          if (navigator.serviceWorker.controller) {
-            navigator.serviceWorker.getRegistration().then(reg => {
-              if (reg) reg.update();
-            });
-          }
-        }, 6 * 60 * 60 * 1000); // 6 hours
-      }
-    })();
-  </script>
 </body>
 </html>
     

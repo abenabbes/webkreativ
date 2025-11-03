@@ -2,7 +2,7 @@
 // WebKreativ - Service Worker automatique (pré-cache + runtime + update automatique)
 
 // Incrémente pour forcer refresh des caches (changer si update)
-const SW_VERSION = 'v1.3';
+const SW_VERSION = 'v1.4';
 const CACHE_NAME = `webkreativ-cache-${SW_VERSION}`;
 const RUNTIME = `webkreativ-runtime-${SW_VERSION}`;
 const ROOT_PATH = '/webkreativ/';
