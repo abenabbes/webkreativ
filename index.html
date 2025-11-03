@@ -490,8 +490,45 @@
   <script src="./js/tailwind-config.js"></script>
   <script src="./js/main.js"></script>
 
-  <!-- ✅ EmailJS SDK (CDN) - doit être chargé avant envoie-email.js -->
+  <!-- ✅ EmailJS SDK (CDN) - doit être chargé avant envoie-email.js
   <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+     -->
+
+  <script>
+    (function() {
+    function loadScript(src) {
+        return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src;
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+        });
+    }
+
+    async function loadEmailJs() {
+        try {
+        await loadScript('https://cdn.emailjs.com/sdk/3.2.0/email.min.js');
+        console.log('EmailJS chargé depuis CDN');
+        } catch(e) {
+        console.warn('CDN EmailJS inaccessible, tentative fallback local');
+        try {
+            await loadScript('./js/email.min.js');
+            console.log('EmailJS chargé depuis local fallback');
+        } catch(e2) {
+            console.error('Impossible de charger EmailJS (CDN et fallback local)');
+        }
+        }
+    }
+
+    // Démarrer le loader avant le script envoie-email.js
+    loadEmailJs().then(() => {
+        const event = new Event('emailjs-ready');
+        window.dispatchEvent(event);
+    });
+    })();
+    </script>
+
 
   <!-- ✅ Ton script d'envoi (séparé) -->
   <script src="./js/envoie-email.js"></script>

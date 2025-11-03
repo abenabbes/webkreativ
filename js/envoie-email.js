@@ -1,27 +1,10 @@
 // ./js/envoie-email.js
-// Script robuste pour envoyer le formulaire via EmailJS
+// Script robuste pour envoyer le formulaire via EmailJS en utilisant emailjs-ready
 
 (function () {
   const PUBLIC_KEY = 'xFNikoKE7n7chXIgE'; // ta clé publique EmailJS
   const SERVICE_ID = 'service_9w7ytnw';
   const TEMPLATE_ID = 'template_itmi7ql';
-  const INIT_TIMEOUT = 10000; // ms à attendre le SDK (10s)
-
-  function waitForEmailJs(timeout = INIT_TIMEOUT) {
-    return new Promise((resolve, reject) => {
-      const interval = 100;
-      let waited = 0;
-      const id = setInterval(() => {
-        if (typeof window.emailjs !== 'undefined') {
-          clearInterval(id);
-          resolve(window.emailjs);
-        } else if ((waited += interval) >= timeout) {
-          clearInterval(id);
-          reject(new Error('EmailJS SDK introuvable (timeout)'));
-        }
-      }, interval);
-    });
-  }
 
   function setFormMessage(text, type = 'info') {
     const msg = document.getElementById('formMessage');
@@ -35,69 +18,58 @@
     msg.classList.remove('hidden');
   }
 
-  async function initAndBind() {
-    try {
-      await waitForEmailJs();
+  function initForm() {
+    // Initialiser EmailJS si nécessaire
+    if (typeof emailjs !== 'undefined' && !emailjs._inited) {
+      try { emailjs.init(PUBLIC_KEY); } catch (e) { console.warn('emailjs.init failed', e); }
+      emailjs._inited = true;
+    }
 
-      // Initialiser EmailJS si nécessaire
-      if (typeof emailjs !== 'undefined' && !emailjs._inited) {
-        try { emailjs.init(PUBLIC_KEY); } catch (e) { console.warn('emailjs.init failed', e); }
-        emailjs._inited = true;
-      }
+    const form = document.getElementById('contactForm');
+    if (!form) {
+      console.warn('Formulaire #contactForm introuvable');
+      return;
+    }
 
-      const form = document.getElementById('contactForm');
-      if (!form) {
-        console.warn('Formulaire #contactForm introuvable');
+    const submitBtn = form.querySelector("button[type='submit']");
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
         return;
       }
 
-      const submitBtn = form.querySelector("button[type='submit']");
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // simple validation HTML5 s'assure des attributs required
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Envoi en cours...';
-        }
-        setFormMessage('Envoi en cours...', 'info');
-
-        try {
-          // sendForm envoie directement le <form>
-          const res = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
-          console.info('EmailJS sendForm result:', res);
-          setFormMessage('Message envoyé. Redirection...', 'success');
-          // redirection vers merci (tu peux changer l'URL si besoin)
-          window.location.href = 'https://abenabbes.github.io/webkreativ/merci.html';
-        } catch (err) {
-          console.error('Erreur envoi EmailJS:', err);
-          setFormMessage('Erreur lors de l’envoi. Veuillez réessayer.', 'error');
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Envoyer le message';
-          }
-        }
-      });
-    } catch (err) {
-      console.error(err);
-      const submitBtn = document.querySelector('#contactForm button[type="submit"]');
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Envoi indisponible';
+        submitBtn.textContent = 'Envoi en cours...';
       }
-      setFormMessage('Envoi indisponible (problème de chargement du SDK).', 'error');
-    }
+      setFormMessage('Envoi en cours...', 'info');
+
+      try {
+        const res = await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form);
+        console.info('EmailJS sendForm result:', res);
+        setFormMessage('Message envoyé. Redirection...', 'success');
+        window.location.href = 'https://abenabbes.github.io/webkreativ/merci.html';
+      } catch (err) {
+        console.error('Erreur envoi EmailJS:', err);
+        setFormMessage('Erreur lors de l’envoi. Veuillez réessayer.', 'error');
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Envoyer le message';
+        }
+      }
+    });
   }
 
-  // Démarrer après DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAndBind);
-  } else {
-    initAndBind();
+  // Attendre que EmailJS soit prêt
+  window.addEventListener('emailjs-ready', function() {
+    initForm();
+  });
+
+  // Cas où l'événement est peut-être déjà passé (EmailJS rapide)
+  if (typeof emailjs !== 'undefined' && emailjs._inited) {
+    initForm();
   }
+
 })();
