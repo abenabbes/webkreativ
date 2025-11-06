@@ -21,3 +21,23 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+/* CSS Partie Mes réalisations */
+.btn-primary {
+  display: inline-block;        /* permet de définir largeur et centrage */
+  width: 100%;                  /* w-full */
+  background-color: #173390;    /* bg-primary (bleu Tailwind par défaut) */
+  color: #fff;                  /* text-white */
+  padding: 10px 0;              /* py-2 */
+  border: none;
+  border-radius: 0.5rem;        /* rounded-lg */
+  text-align: center;           /* centre le texte */
+  text-decoration: none;        /* retire le soulignement du lien */
+  font-weight: 500;
+  transition: background-color 0.3s ease; /* transition-colors */
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;    /* hover:bg-blue-800 */
+}
