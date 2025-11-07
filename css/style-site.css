@@ -22,7 +22,6 @@
     transform: translateY(0);
 }
 
-/* CSS Partie Mes réalisations */
 .btn-primary {
   display: inline-block;        /* permet de définir largeur et centrage */
   width: 100%;                  /* w-full */
