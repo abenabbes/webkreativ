@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Indiquer l'emplacement du sitemap pour aider les robots à trouver toutes vos pages.
-Sitemap: https://abenabbes.github.io/portfolio/sitemap.xml
+Sitemap: https://abenabbes.github.io/webkreativ/sitemap.xml
