@@ -7,72 +7,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebKreativ - Développeur Web Freelance | Création de sites modernes</title>
     <meta name="author" content="Ali BEN ABBES">
-    <!-- Balise robots (indexation SEO) -->
     <meta name="robots" content="index, follow">
-     <!-- Meta description (SEO : 150-160 caractères max) -->
     <meta name="description" content="WebKreativ, freelance spécialisé dans la création de sites web statiques modernes, responsives et optimisés SEO. Transformez votre présence en ligne dès aujourd'hui !">
-    
 
-    <!-- Balises Open Graph (pour Facebook, LinkedIn, etc.) -->
+    <!-- Open Graph / Social -->
     <meta property="og:title" content="Ali BEN ABBES - Développeur Web Freelance">
     <meta property="og:description" content="Création de sites web modernes, responsives et optimisés pour le référencement.">
-    <!-- TODO : Ajouter une image de preview -->
-    <meta property="og:image" content="https://abenabbes.github.io/webkreativ/favicon/favicon-96x96.png">
+    <!-- Remplace par une image 1200x630 px pour un rendu optimal -->
+    <meta property="og:image" content="https://abenabbes.github.io/webkreativ/img/og-preview.png">
     <meta property="og:url" content="https://abenabbes.github.io/webkreativ/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Favicon -->
+    <!-- Favicon / manifest -->
     <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
     <link rel="shortcut icon" href="favicon/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
     <link rel="manifest" href="./site.webmanifest" />
     <meta name="theme-color" content="#0a192f">
-    
-    <!-- Canonical URL -->
+
     <link rel="canonical" href="https://abenabbes.github.io/webkreativ/" />
 
-    <!-- CSS -->
+    <!-- Fonts & CSS -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"></noscript>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="./css/style-site.css">
-    <!-- Préconnect réduit le temps de résolution DNS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- ========= JS =========== -->
+    <!-- Tailwind CDN (remarque : idéalement remplacer plus tard par CSS buildé/minifié) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
- <!-- Données structurées JSON-LD (SEO avancé pour Google) -->
- <!--TODO : revoir les liens vers linkedin et github-->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "ALi BEN ABBES",
-    "jobTitle": "Développeur Web Freelance",
-    "url": "https://abenabbes.github.io/webkreativ/",    
-    "description": "Développeur web freelance spécialisé dans la création de sites performants et modernes.",
-    "sameAs": [
-      "https://www.linkedin.com/in/abenabbes",
-      "https://github.com/abenabbes",
-      "https://twitter.com/abenabbes"      
-    ]
-  }
-  </script>
+
+    <!-- JSON-LD : ProfessionalService (plus adapté) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "WebKreativ",
+      "url": "https://abenabbes.github.io/webkreativ/",
+      "logo": "https://abenabbes.github.io/webkreativ/favicon/favicon-96x96.png",
+      "description": "Création de sites web vitrines modernes, rapides et optimisés pour les indépendants et petites entreprises.",
+      "telephone": "+33 6 28 45 97 99",
+      "email": "alibenabbes14@gmail.com",
+      "sameAs": [
+        "https://www.linkedin.com/in/abenabbes",
+        "https://github.com/abenabbes",
+        "https://twitter.com/abenabbes"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "FR"
+      }
+    }
+    </script>
 </head>
 <body class="font-poppins bg-white text-gray-800">
+
+    <!-- Skip link for keyboard users -->
+    <a class="sr-only focus:not-sr-only p-2 bg-primary text-white fixed left-4 top-4 z-50 rounded" href="#mainContent">Aller au contenu</a>
+
     <!-- Header -->
-    <header class="fixed w-full bg-white shadow-sm z-50">
-        <nav class="container mx-auto px-4 py-4">
+    <header class="fixed w-full bg-white shadow-sm z-50" role="banner">
+        <nav class="container mx-auto px-4 py-4" role="navigation" aria-label="Navigation principale">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <h1 class="text-2xl font-bold text-primary">WebKreativ</h1>
+                    <!-- brand: not H1 to keep a single H1 in the page content -->
+                    <div role="img" aria-label="WebKreativ logo" class="text-2xl font-bold text-primary">WebKreativ</div>
                 </div>
-                
+
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#accueil" class="text-gray-600 hover:text-primary transition-colors">Accueil</a>
@@ -84,15 +89,15 @@
                         Demander un devis
                     </button>
                 </div>
-                
+
                 <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()">
+                <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()" aria-expanded="false" aria-controls="mobileMenu">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
-            
+
             <!-- Mobile Menu -->
-            <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4 pb-4">
+            <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-4 pb-4" aria-hidden="true">
                 <a href="#accueil" class="block text-gray-600 hover:text-primary">Accueil</a>
                 <a href="#services" class="block text-gray-600 hover:text-primary">Services</a>
                 <a href="#realisations" class="block text-gray-600 hover:text-primary">Réalisations</a>
@@ -105,16 +110,16 @@
         </nav>
     </header>
 
-    <main>
-        <!-- Hero Section -->
+    <main id="mainContent">
+        <!-- Hero Section (H1 unique) -->
         <section id="accueil" class="pt-24 pb-16 bg-gradient-to-br from-blue-50 to-white">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="scroll-animate">
-                        <h2 class="text-4xl lg:text-5xl font-bold text-primary mb-6">
+                        <h1 class="text-4xl lg:text-5xl font-bold text-primary mb-6">
                             Des sites web statiques 
                             <span class="text-accent">modernes et performants</span>
-                        </h2>
+                        </h1>
                         <p class="text-xl text-gray-600 mb-8">
                             Je crée des sites web vitrines élégants, rapides et optimisés pour le référencement. 
                             Votre présence en ligne, simplifiée et professionnelle.
@@ -140,127 +145,113 @@
             </div>
         </section>
 
-        <!-- Services Section une section de services -->
+        <!-- Services Section (adapted copy - pragmatic & efficient) -->
         <section id="services" class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12 scroll-animate">
                     <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-4">Mes Services</h2>
                     <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Des solutions complètes pour votre présence en ligne
+                        Des solutions simples et efficaces pour une présence en ligne qui convertit.
                     </p>
                 </div>
-                
+
+                <div class="max-w-4xl mx-auto mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-semibold text-primary mb-3">Site Vitrine Essentiel</h3>
+                        <p class="text-gray-700 mb-4">
+                            Un site simple, clair et performant pour présenter votre activité et générer des contacts.
+                        </p>
+
+                        <ul class="list-disc pl-5 mb-4 text-gray-600">
+                            <li>1 à 3 pages : Accueil • Services • Contact</li>
+                            <li>Design moderne et responsive</li>
+                            <li>Formulaire de contact fonctionnel</li>
+                            <li>Textes et structure SEO de base</li>
+                            <li>Hébergement sur GitHub Pages (ou installation sur votre hébergement)</li>
+                        </ul>
+
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm text-gray-500">Prix indicatif</div>
+                                <div class="text-2xl font-bold text-primary">À partir de 149 €</div>
+                                <div class="text-sm text-gray-500">Délai : 2 à 5 jours</div>
+                            </div>
+                            <div>
+                                <a href="#contact" class="inline-block bg-primary text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition-colors">Demander un devis</a>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">Le prix dépend du contenu et des options (nom de domaine, e-mail pro, rédaction de contenu).</p>
+                    </div>
+                </div>
+
+                <!-- feature cards (kept) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="scroll-animate bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                             <i class="fas fa-laptop-code text-primary text-xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-primary mb-3">Création de Site Vitrine</h3>
-                        <p class="text-gray-600">
-                            Sites web statiques sur mesure, design moderne et adapté à votre activité professionnelle.
-                        </p>
+                        <p class="text-gray-600">Sites web statiques sur mesure, design moderne et adapté à votre activité professionnelle.</p>
                     </div>
-                    
                     <div class="scroll-animate bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                             <i class="fas fa-mobile-alt text-primary text-xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-primary mb-3">Design Responsive</h3>
-                        <p class="text-gray-600">
-                            Sites optimisés pour tous les appareils : desktop, tablette et mobile.
-                        </p>
+                        <p class="text-gray-600">Sites optimisés pour tous les appareils : desktop, tablette et mobile.</p>
                     </div>
-                    
                     <div class="scroll-animate bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                             <i class="fas fa-search text-primary text-xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-primary mb-3">Optimisation SEO</h3>
-                        <p class="text-gray-600">
-                            Structure et contenu optimisés pour un meilleur référencement sur Google.
-                        </p>
+                        <p class="text-gray-600">Structure et contenu optimisés pour un meilleur référencement sur Google.</p>
                     </div>
-                    
                     <div class="scroll-animate bg-white p-6 rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
                         <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                             <i class="fab fa-github text-primary text-xl"></i>
                         </div>
                         <h3 class="text-xl font-semibold text-primary mb-3">Hébergement GitHub Pages</h3>
-                        <p class="text-gray-600">
-                            Solution d'hébergement gratuite, sécurisée et performante pour votre site.
-                        </p>
+                        <p class="text-gray-600">Solution d'hébergement gratuite, sécurisée et performante pour votre site.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Realisations Section -->
+        <!-- Realisations Section (kept mostly unchanged) -->
         <section id="realisations" class="py-16 bg-gray-50">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12 scroll-animate">
                     <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-4">Mes Réalisations</h2>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                        Découvrez quelques-uns de mes projets récents
-                    </p>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Découvrez quelques-uns de mes projets récents</p>
                 </div>
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- cards kept as-is -->
                     <div class="scroll-animate bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                        <img 
-                            src="./img/restaurant.webp" 
-                            alt="Site web restaurant gastronomique" 
-                            class="w-full h-48 object-cover"
-                            loading="lazy"
-                        />
+                        <img src="./img/restaurant.webp" alt="Site web restaurant gastronomique" class="w-full h-48 object-cover" loading="lazy"/>
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-primary mb-2">Restaurant Étoile</h3>
-                            <p class="text-gray-600 mb-4">
-                                Site vitrine élégant pour un restaurant gastronomique avec réservation en ligne.
-                            </p>
-                            
-                               <a href="./templates/tmprestaurant.html" 
-                                  target="_blank"
-                                  class="btn-primary">Voir le site</a>                                
-                            
+                            <p class="text-gray-600 mb-4">Site vitrine élégant pour un restaurant gastronomique avec réservation en ligne.</p>
+                            <a href="./templates/tmprestaurant.html" target="_blank" rel="noopener" class="btn-primary">Voir le site</a>
                         </div>
                     </div>
-                    
+
                     <div class="scroll-animate bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                        <img 
-                            src="./img/petite-enfance.webp" 
-                            alt="Site web architecte" 
-                            class="w-full h-48 object-cover"
-                            loading="lazy"
-                        />
+                        <img src="./img/petite-enfance.webp" alt="Site web architecte" class="w-full h-48 object-cover" loading="lazy"/>
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-primary mb-2">Petite Enfance</h3>
-                            <p class="text-gray-600 mb-4">
-                                Portfolio professionnel mettant en valeur les activités Parents et Enfants.
-                            </p>
-                            
-                                <a href="https://abenabbes.github.io/portfolio/" 
-                                   target="_blank"
-                                   class="btn-primary">Voir le site</a>                                
-                            
+                            <p class="text-gray-600 mb-4">Portfolio professionnel mettant en valeur les activités Parents et Enfants.</p>
+                            <a href="https://abenabbes.github.io/portfolio/" target="_blank" rel="noopener" class="btn-primary">Voir le site</a>
                         </div>
                     </div>
-                    
+
                     <div class="scroll-animate bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                        <img 
-                            src="./img/toilettage-animaux.webp" 
-                            alt="Site web consultant" 
-                            class="w-full h-48 object-cover"
-                            loading="lazy"
-                        />
+                        <img src="./img/toilettage-animaux.webp" alt="Site web consultant" class="w-full h-48 object-cover" loading="lazy"/>
                         <div class="p-6">
                             <h3 class="text-xl font-semibold text-primary mb-2">Toilettage Animaux</h3>
-                            <p class="text-gray-600 mb-4">
-                                Site corporate pour sallon de toilettage d'animaux.
-                            </p>
-                            <a href="#" 
-                               class="btn-primary">
-                                Voir le site
-                            </a>
+                            <p class="text-gray-600 mb-4">Site corporate pour salon de toilettage d'animaux.</p>
+                            <a href="#" class="btn-primary">Voir le site</a>
                         </div>
                     </div>
                 </div>
@@ -272,25 +263,12 @@
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="scroll-animate">
-                        <img 
-                            src="./img/apropos-site.webp" 
-                            alt="Photo du freelance WebKreativ" 
-                            class="w-full rounded-2xl shadow-lg"
-                            loading="lazy"
-                        />
+                        <img src="./img/apropos-site.webp" alt="Photo du freelance WebKreativ" class="w-full rounded-2xl shadow-lg" loading="lazy"/>
                     </div>
                     <div class="scroll-animate">
                         <h2 class="text-3xl lg:text-4xl font-bold text-primary mb-6">À propos de moi</h2>
-                        <p class="text-lg text-gray-600 mb-6">
-                            Passionné par le développement web depuis plus de 15 ans, je me suis spécialisé dans 
-                            la création de sites web statiques modernes et performants. Mon approche allie 
-                            esthétique soignée et optimisation technique.
-                        </p>
-                        <p class="text-lg text-gray-600 mb-8">
-                            Je maîtrise les technologies modernes du web (HTML5, CSS3, JavaScript, Tailwind CSS) 
-                            et je m'engage à livrer des sites rapides, accessibles et parfaitement adaptés 
-                            à vos besoins professionnels.
-                        </p>
+                        <p class="text-lg text-gray-600 mb-6">Passionné par le développement web depuis plus de 15 ans, je me suis spécialisé dans la création de sites web statiques modernes et performants. Mon approche allie esthétique soignée et optimisation technique.</p>
+                        <p class="text-lg text-gray-600 mb-8">Je maîtrise les technologies modernes du web (HTML5, CSS3, JavaScript, Tailwind CSS) et je m'engage à livrer des sites rapides, accessibles et parfaitement adaptés à vos besoins professionnels.</p>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="flex items-center">
                                 <i class="fas fa-check text-green-500 mr-3"></i>
@@ -314,199 +292,110 @@
             </div>
         </section>
 
-        <!-- 📨 Section Contact -->
+        <!-- Contact Section (kept, with consistent mailto) -->
         <section id="contact" class="py-16 bg-primary text-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div class="scroll-animate space-y-8">
+                        <div>
+                            <h2 class="text-3xl lg:text-4xl font-bold mb-4">Discutons de votre projet</h2>
+                            <p class="text-xl text-blue-100">Prêt à donner vie à votre projet web ? Contactez-moi pour une consultation gratuite.</p>
+                        </div>
 
-            <!-- 🔹 Bloc gauche : texte + contact + réseaux -->
-            <div class="scroll-animate space-y-8">
+                        <div class="space-y-4">
+                            <div class="flex items-center bg-white/10 rounded-lg p-3 backdrop-blur-sm hover:bg-white/20 transition">
+                                <i class="fas fa-envelope text-accent text-2xl mr-4"></i>
+                                <a href="mailto:alibenabbes14@gmail.com" class="text-blue-50 hover:text-white transition-colors text-lg" aria-label="Envoyer un e-mail à WebKreativ">alibenabbes14@gmail.com</a>
+                            </div>
 
-                <div>
-                <h2 class="text-3xl lg:text-4xl font-bold mb-4">Discutons de votre projet</h2>
-                <p class="text-xl text-blue-100">
-                    Prêt à donner vie à votre projet web ? Contactez-moi pour une consultation gratuite.
-                </p>
-                </div>
+                            <div class="flex items-center bg-white/10 rounded-lg p-3 backdrop-blur-sm hover:bg-white/20 transition">
+                                <i class="fas fa-phone-alt text-accent text-2xl mr-4"></i>
+                                <a href="tel:+33628459799" class="text-blue-50 hover:text-white transition-colors text-lg" aria-label="Appeler WebKreativ">+33 6 28 45 97 99</a>
+                            </div>
+                        </div>
 
-                <!-- 🔹 Coordonnées -->
-                <div class="space-y-4">
-                <!-- Email -->
-                <div class="flex items-center bg-white/10 rounded-lg p-3 backdrop-blur-sm hover:bg-white/20 transition">
-                    <i class="fas fa-envelope text-accent text-2xl mr-4"></i>
-                    <a href="mailto:alibenabbes14@gmail.com"
-                    class="text-blue-50 hover:text-white transition-colors text-lg"
-                    aria-label="Envoyer un e-mail à WebKreativ">
-                    contact@webkreativ.fr
-                    </a>
-                </div>
+                        <div class="flex items-center space-x-6 pt-4">
+                            <a href="https://github.com/abenabbes" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub d'Ali BEN ABBES"><i class="fab fa-github text-2xl"></i></a>
+                            <a href="https://www.linkedin.com/in/abenabbes" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn d'Ali BEN ABBES"><i class="fab fa-linkedin text-2xl"></i></a>
+                            <a href="https://twitter.com/abenabbes" target="_blank" rel="noopener noreferrer" aria-label="Profil Twitter d'Ali BEN ABBES"><i class="fab fa-twitter text-2xl"></i></a>
+                        </div>
+                    </div>
 
-                <!-- Téléphone -->
-                <div class="flex items-center bg-white/10 rounded-lg p-3 backdrop-blur-sm hover:bg-white/20 transition">
-                    <i class="fas fa-phone-alt text-accent text-2xl mr-4"></i>
-                    <a href="tel:+33602030405"
-                    class="text-blue-50 hover:text-white transition-colors text-lg"
-                    aria-label="Appeler WebKreativ">
-                    +33 6 28 45 97 99
-                    </a>
-                </div>
-                </div>
+                    <div class="scroll-animate animate-fadeIn delay-200">
+                        <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg" novalidate>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
+                                <input name="name" type="text" id="name" placeholder="Votre nom" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white" required>
+                                <p id="nameError" class="text-red-600 text-sm hidden" role="alert"></p>
+                            </div>
 
-                <!-- 🔹 Réseaux sociaux -->
-                <div class="flex items-center space-x-6 pt-4">
-                <a href="https://github.com/abenabbes"
-                    class="text-blue-100 hover:text-white transition transform hover:scale-110"
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label="Profil GitHub d'Ali BEN ABBES">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="email">Email</label>
+                                <input name="email" type="email" id="email" placeholder="votre@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white" required>
+                                <p id="emailError" class="text-red-600 text-sm hidden" role="alert"></p>
+                            </div>
 
-                <a href="https://www.linkedin.com/in/abenabbes"
-                    class="text-blue-100 hover:text-white transition transform hover:scale-110"
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label="Profil LinkedIn d'Ali BEN ABBES">
-                    <i class="fab fa-linkedin text-2xl"></i>
-                </a>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="telephone">Téléphone</label>
+                                <input name="telephone" type="tel" id="telephone" placeholder="06 02 03 04 05" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white" required>
+                                <p id="telephoneError" class="text-red-600 text-sm hidden" role="alert"></p>
+                            </div>
 
-                <a href="https://twitter.com/abenabbes"
-                    class="text-blue-100 hover:text-white transition transform hover:scale-110"
-                    target="_blank" rel="noopener noreferrer"
-                    aria-label="Profil Twitter d'Ali BEN ABBES">
-                    <i class="fab fa-twitter text-2xl"></i>
-                </a>
+                            <div class="mb-6">
+                                <label class="block text-gray-700 mb-2" for="message">Message</label>
+                                <textarea name="message" id="message" rows="5" placeholder="Décrivez votre projet..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white" required></textarea>
+                                <p id="messageError" class="text-red-600 text-sm hidden" role="alert"></p>
+                            </div>
+
+                            <button id="submitBtn" type="submit" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium">Envoyer le message</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <!-- 🔹 Bloc droit : formulaire -->
-            <div class="scroll-animate animate-fadeIn delay-200">
-                <form id="contactForm" class="bg-white rounded-2xl p-8 shadow-lg" novalidate>
-
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="name">Nom complet</label>
-                    <input name="name" type="text" id="name" placeholder="Votre nom"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                           required>
-                </div>
-                <!-- Message d'erreur-->
-                 <p id="nameError" class="text-red-600 text-sm hidden"></p>
-
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="email">Email</label>
-                    <input name="email" type="email" id="email" placeholder="votre@email.com"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                           required>
-                </div>
-                <!-- Message d'erreur-->
-                 <p id="emailError" class="text-red-600 text-sm hidden"></p>
-
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="telephone">Téléphone</label>
-                    <input name="telephone" type="tel" id="telephone" placeholder="06 02 03 04 05"
-                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                           required >
-                </div>
-                <!-- Message d'erreur-->
-                 <p id="telephoneError" class="text-red-600 text-sm hidden"></p>
-                
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2" for="message">Message</label>
-                    <textarea name="message" id="message" rows="5" placeholder="Décrivez votre projet..."
-                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800 bg-white"
-                              required></textarea>
-                </div>
-                <!-- Message d'erreur-->
-                 <p id="messageError" class="text-red-600 text-sm hidden"></p>
-
-                <button id="submitBtn" type="submit"
-                        class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-800 transition-colors font-medium">
-                    Envoyer le message
-                </button>
-            </form>
-        </div>
-    </div>
-</div>
-</section>
-
+        </section>
     </main>
 
-    <!-- ========================= -->
-    <!-- 🌐 Footer amélioré -->
-    <!-- ========================= -->
     <footer class="bg-gray-900 text-gray-300 py-10">
-    <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2">WebKreativ</h3>
+                    <p class="text-gray-400">Création de sites web modernes et performants.<br>
+                        <span class="block mt-2 text-sm text-gray-500">© 2025 Ali BEN ABBES — Tous droits réservés</span>
+                    </p>
+                </div>
 
-        <!-- 🔹 Bloc gauche : logo + droits -->
-        <div>
-            <h3 class="text-2xl font-bold text-white mb-2">WebKreativ</h3>
-            <p class="text-gray-400">
-            Création de sites web modernes et performants.<br>
-            <span class="block mt-2 text-sm text-gray-500">
-                © 2025 Ali BEN ABBES — Tous droits réservés
-            </span>
-            </p>
-        </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="hover:text-accent transition-colors">Accueil</a></li>
+                        <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
+                        <li><a href="#realisations" class="hover:text-accent transition-colors">Réalisations</a></li>
+                        <li><a href="#apropos" class="hover:text-accent transition-colors">À propos</a></li>
+                        <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
+                    </ul>
+                </div>
 
-        <!-- 🔹 Bloc centre : navigation secondaire -->
-        <div>
-            <h4 class="text-lg font-semibold text-white mb-3">Navigation</h4>
-            <ul class="space-y-2">
-            <li><a href="#accueil" class="hover:text-accent transition-colors">Accueil</a></li>
-            <li><a href="#services" class="hover:text-accent transition-colors">Services</a></li>
-            <li><a href="#realisations" class="hover:text-accent transition-colors">Réalisations</a></li>
-            <li><a href="#apropos" class="hover:text-accent transition-colors">À propos</a></li>
-            <li><a href="#contact" class="hover:text-accent transition-colors">Contact</a></li>
-            </ul>
-        </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-3">Réseaux</h4>
+                    <div class="flex justify-center md:justify-start space-x-6">
+                        <a href="https://github.com/abenabbes" class="text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Profil GitHub d'Ali BEN ABBES"><i class="fab fa-github text-2xl"></i></a>
+                        <a href="https://www.linkedin.com/in/abenabbes" class="text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Profil LinkedIn d'Ali BEN ABBES"><i class="fab fa-linkedin text-2xl"></i></a>
+                        <a href="https://twitter.com/abenabbes" class="text-gray-400 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Profil Twitter d'Ali BEN ABBES"><i class="fab fa-twitter text-2xl"></i></a>
+                    </div>
+                </div>
+            </div>
 
-        <!-- 🔹 Bloc droit : réseaux sociaux -->
-        <div>
-            <h4 class="text-lg font-semibold text-white mb-3">Réseaux</h4>
-            <div class="flex justify-center md:justify-start space-x-6">
-            <a href="https://github.com/abenabbes"
-                class="text-gray-400 hover:text-white transition-colors"
-                target="_blank" rel="noopener noreferrer"
-                aria-label="Profil GitHub d'Ali BEN ABBES">
-                <i class="fab fa-github text-2xl"></i>
-            </a>
-
-            <a href="https://www.linkedin.com/in/abenabbes"
-                class="text-gray-400 hover:text-white transition-colors"
-                target="_blank" rel="noopener noreferrer"
-                aria-label="Profil LinkedIn d'Ali BEN ABBES">
-                <i class="fab fa-linkedin text-2xl"></i>
-            </a>
-
-            <a href="https://twitter.com/abenabbes"
-                class="text-gray-400 hover:text-white transition-colors"
-                target="_blank" rel="noopener noreferrer"
-                aria-label="Profil Twitter d'Ali BEN ABBES">
-                <i class="fab fa-twitter text-2xl"></i>
-            </a>
+            <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
+                Propulsé avec ❤️ par <span class="text-white font-medium">WebKreativ</span>
             </div>
         </div>
-        </div>
-
-        <!-- 🔸 Ligne de séparation -->
-        <div class="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
-        Propulsé avec ❤️ par <span class="text-white font-medium">WebKreativ</span>
-        </div>
-    </div>
     </footer>
 
-  <!-- ========================================= -->
-  <!-- SCRIPTS (fin de body)                     -->
-  <!-- ========================================= -->
-  
-  <script src="./js/tailwind-config.js"></script>
-  <script src="./js/main.js" defer></script>
-
-  <!-- ✅ EmailJS SDK (CDN) - doit être chargé avant envoie-email.js -->
- <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" async></script>
-  
-  <!-- ✅ Ton script d'envoi (séparé) -->
-  <script src="./js/envoie-email.js" defer></script>
-
+    <!-- Scripts -->
+    <script src="./js/tailwind-config.js"></script>
+    <script src="./js/main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js" async></script>
+    <script src="./js/envoie-email.js" defer></script>
 </body>
 </html>
-    
